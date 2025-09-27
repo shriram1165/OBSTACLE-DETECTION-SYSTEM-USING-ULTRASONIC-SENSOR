@@ -53,11 +53,75 @@ Step 7: Save Your Work
 
 
 ## Code:
+~~~
+// Obstacle Detection using HC-SR04 (Arduino)
+// Trigger = D9, Echo = D10, LED = D6, Buzzer = D7
+const int trigPin = 9;
+const int echoPin = 10;
+const int ledPin  = 6;
+const int buzzerPin = 7;
 
+long duration;
+float distanceCM;
+const float thresholdCM = 25.0; // change to set detection range
+
+void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
+  digitalWrite(ledPin, LOW);
+  digitalWrite(buzzerPin, LOW);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // send 10us pulse to trigger
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // read echo pulse duration (microseconds)
+  duration = pulseIn(echoPin, HIGH, 30000); // timeout 30ms to avoid lock
+  if (duration == 0) {
+    // no echo received (out of range)
+    distanceCM = -1;
+  } else {
+    // Convert to distance: Sound speed ~343 m/s → 29.1 µs per cm for round trip.
+    // Common approximation: distance_cm = duration / 58.0
+    distanceCM = duration / 58.0;
+  }
+
+  // Print to serial for debugging
+  if (distanceCM > 0) {
+    Serial.print("Distance: ");
+    Serial.print(distanceCM);
+    Serial.println(" cm");
+  } else {
+    Serial.println("Out of range");
+  }
+
+  // Obstacle detection logic
+  if (distanceCM > 0 && distanceCM <= thresholdCM) {
+    // Obstacle detected
+    digitalWrite(ledPin, HIGH);
+    // buzzer beep pattern
+    tone(buzzerPin, 1000); // 1kHz tone
+  } else {
+    digitalWrite(ledPin, LOW);
+    noTone(buzzerPin);
+  }
+
+  delay(150); // small delay between measurements
+}
+~~~
 
 ## Output:
- 
-
+~~~~
+ https://go.screenpal.com/watch/cTQtfXnDtZX
+~~~
 
 ## Result
 
