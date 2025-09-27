@@ -119,9 +119,8 @@ void loop() {
 ~~~
 
 ## Output:
-~~~~
  https://go.screenpal.com/watch/cTQtfXnDtZX
-~~~
+ 
 
 ## Result
 
