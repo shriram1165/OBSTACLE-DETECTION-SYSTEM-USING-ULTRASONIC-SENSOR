@@ -1,3 +1,4 @@
+SHRIRAM.S(212222020027)
 # OBSTACLE-DETECTION-SYSTEM-USING-ULTRASONIC-SENSOR
 
 ## Aim:
@@ -19,8 +20,11 @@ Tinkercad provides a simulation environment where this circuit can be virtually 
 
 
 ## Circuit Diagram:
+~~~
+<img width="1470" height="702" alt="image" src="https://github.com/user-attachments/assets/48d6bf99-fd32-45da-9534-bffa7161ff3e" />
+~~~
  
-## Procedure: //Modify the procedure based on your circuit
+## Procedure:
 
 Step 1: Set Up the Tinkercad Environment
 1.	Log in to Tinkercad: Open Tinkercad in your web browser and log into your account.
@@ -123,7 +127,6 @@ void loop() {
  
 
 ## Result
-
-
-Result:
+~~~
 The simulation successfully measured the distance between the ultrasonic sensor  HC-SR04 and the object. The real-time distance values were accurately displayed on the serial monitor in centimeters.
+~~~
